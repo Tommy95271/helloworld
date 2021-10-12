@@ -2,22 +2,20 @@
   <div class="">
     <h1>VueDirective</h1>
     <!-- <button @click.prevent="toggleInputValue">Click me to toggle inputValue</button> -->
-    <form class="" v-if="isVisible" @submit="handleSubmit">
+    <form class="" v-if="isVisible" @submit.prevent="handleSubmit">
       <label for="inputValue">inputValue</label>
-      <input
-        type="text"
-        id="inputValue"
-        v-model="inputValue"
-        @keyup.enter="consoleLog(inputValue)"
-      />
-      <span>{{ inputValue }}</span>
+      <custom-input v-model="inputValue" label="test"></custom-input>
+      <!-- <span>{{ inputValue }}</span> -->
       <button type="submit">Submit</button>
     </form>
   </div>
 </template>
 
 <script>
+import CustomInput from "./CustomInput.vue";
+
 export default {
+  components: { CustomInput },
   name: "VueDirective",
   props: {
     msg: String,
@@ -32,9 +30,6 @@ export default {
   methods: {
     toggleInputValue() {
       this.isVisible = !this.isVisible;
-    },
-    consoleLog(inputValue) {
-      console.log(inputValue);
     },
     handleSubmit() {
       console.log(this.inputValue);
