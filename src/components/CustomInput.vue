@@ -1,7 +1,8 @@
 <template>
+  <label for="">{{ label }}</label>
   <input
-    type="text"
-    id="inputValue"
+    :id="id"
+    :type="type"
     v-model="inputValue"
   />
   {{ label }}
@@ -11,8 +12,10 @@
 export default {
   name: "CustomInput",
   props: {
+    id: Number,
     label: String,
     modelValue: String,
+    type: String,
   },
   computed: {
     inputValue: {

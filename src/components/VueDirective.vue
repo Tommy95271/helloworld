@@ -4,7 +4,7 @@
     <!-- <button @click.prevent="toggleInputValue">Click me to toggle inputValue</button> -->
     <form class="" v-if="isVisible" @submit.prevent="handleSubmit">
       <label for="inputValue">inputValue</label>
-      <custom-input v-model="inputValue" label="test"></custom-input>
+      <custom-input v-for="input in inputs" v-model="input.value" :key="input.id" :id="input.id" :type="input.type" :label="input.label"></custom-input>
       <!-- <span>{{ inputValue }}</span> -->
       <button type="submit">Submit</button>
     </form>
@@ -25,6 +25,7 @@ export default {
       msg1: "test",
       inputValue: "",
       isVisible: true,
+      inputs: [{ id: 1, label: "Email", value: "", type: "email" },{ id: 2, label: "Password", value: "", type: "password" }],
     };
   },
   methods: {
@@ -32,7 +33,9 @@ export default {
       this.isVisible = !this.isVisible;
     },
     handleSubmit() {
-      console.log(this.inputValue);
+        this.inputs.forEach(e => {
+            console.log(e);
+        });
     },
   },
 };
